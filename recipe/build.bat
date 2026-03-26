@@ -15,3 +15,10 @@ if not exist "%PREFIX%\Library\bin" mkdir "%PREFIX%\Library\bin"
 REM Call the autotools clang conda build wrapper
 call "%BUILD_PREFIX%\Library\bin\run_autotools_clang_conda_build.bat" build.sh
 if %ERRORLEVEL% neq 0 exit 1
+
+REM Install renamenoise.pc alias for mumble-voip compatibility.
+REM mumble's CMake calls find_pkg(renamenoise) which falls back to
+REM pkg_search_module for a module named "renamenoise", not "rnnoise".
+if not exist "%PREFIX%\Library\lib\pkgconfig" mkdir "%PREFIX%\Library\lib\pkgconfig"
+powershell -Command "(Get-Content '%RECIPE_DIR%\renamenoise.pc') -replace '@VERSION@', '%PKG_VERSION%' | Set-Content '%PREFIX%\Library\lib\pkgconfig\renamenoise.pc'"
+if %ERRORLEVEL% neq 0 exit 1

@@ -35,3 +35,12 @@ fi
 
 make -j"${CPU_COUNT:-1}"
 make install
+
+if [[ "${target_platform}" != "win-64" ]]; then
+    # Install renamenoise.pc alias for mumble-voip compatibility.
+    # mumble's CMake calls find_pkg(renamenoise) which falls back to
+    # pkg_search_module for a module named "renamenoise", not "rnnoise".
+    # Windows is handled in build.bat.
+    sed "s/@VERSION@/${PKG_VERSION}/" "${RECIPE_DIR}/renamenoise.pc" \
+        > "${PREFIX}/lib/pkgconfig/renamenoise.pc"
+fi

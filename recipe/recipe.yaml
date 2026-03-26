@@ -22,7 +22,7 @@ source:
     sha256: 4ac81c5c0884ec4bd5907026aaae16209b7b76cd9d7f71af582094a2f98f4b43
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -48,6 +48,7 @@ tests:
         - rnnoise.h
       files:
         - ${{ "Library/" if win }}lib/pkgconfig/rnnoise.pc
+        - ${{ "Library/" if win }}lib/pkgconfig/renamenoise.pc
 
 about:
   homepage: https://gitlab.xiph.org/xiph/rnnoise
