@@ -1,4 +1,4 @@
 Name: renamenoise
-Description: Alias for rnnoise (as used by mumble-voip)
+Description: Alias for rnnoise (as used by legacy apps, mumble-voip)
 Version: @VERSION@
 Requires: rnnoise
